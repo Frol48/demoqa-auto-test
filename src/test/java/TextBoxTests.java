@@ -46,7 +46,7 @@ public class TextBoxTests {
 
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(
+        $(".table-responsive").shouldHave( 
                 text("Alex Egorov"),
                 text("AlexEgorov@example.com"),
                 text("Male"),
