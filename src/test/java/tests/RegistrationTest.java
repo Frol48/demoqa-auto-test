@@ -2,43 +2,42 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import page.RegistrationPage;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import utils.RandomDataUtils;
 
 public class RegistrationTest extends TestBase{
 
     RegistrationPage registrationPage = new RegistrationPage();
+    TestData td = new TestData();
+
+
 
     @Test
     void successfulRegistrationTest() {
         registrationPage.openPage()
-                .setFirstName("Alex")
-                .setLastName("Egorov")
-                .setUserEmail("AlexEgorov@example.com")
-                .setGender("Male")
-                .setUserNumber("9005001020")
-                .setBirthDay("10", "November", "1999")
-                .setSubjects("en")
-                .setHobbies("Sports")
-                .setHobbies("Music")
-                .uploadPicture("test.jpg")
-                .setCurrentAddress("test 123 testtset")
-                .setState("NCR")
-                .setCity("Noida")
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setUserEmail(td.email)
+                .setGender(td.gender)
+                .setUserNumber(td.phone)
+                .setBirthDay(td.day, td.month, td.year)
+                .setSubjects(td.subjet)
+                .setHobbies(td.hobbies)
+                .uploadPicture(td.image)
+                .setCurrentAddress(td.address)
+                .setState(td.state)
+                .setCity(td.city)
                 .setSubmit();
 
-        registrationPage.checkResultRegistration("Student Name", "Alex Egorov")
-                .checkResultRegistration("Student Email","AlexEgorov@example.com")
-                .checkResultRegistration("Gender","Male")
-                .checkResultRegistration("Mobile","9005001020")
-                .checkResultRegistration("Date of Birth","10 November,1999")
-                .checkResultRegistration("Subjects","English")
-                .checkResultRegistration("Hobbies","Sports, Music")
-                .checkResultRegistration("Picture","test.jpg")
-                .checkResultRegistration("Address","test 123 testtset")
-                .checkResultRegistration("State and City","NCR Noida");
+        registrationPage.checkResultRegistration("Student Name", td.firstName + " " + td.lastName)
+                .checkResultRegistration("Student Email",td.email)
+                .checkResultRegistration("Gender",td.gender)
+                .checkResultRegistration("Mobile",td.phone)
+                .checkResultRegistration("Date of Birth",td.day + " " + td.month + "," + td.year)
+                .checkResultRegistration("Subjects",td.subjet)
+                .checkResultRegistration("Hobbies",td.hobbies)
+                .checkResultRegistration("Picture",td.image)
+                .checkResultRegistration("Address",td.address)
+                .checkResultRegistration("State and City",td.state + " " + td.city);
     }
 }
 
